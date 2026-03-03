@@ -1,6 +1,6 @@
 package com.project.sudoku.solver;
 
-import board.SudokuBoard;
+import com.project.sudoku.*;
 
 public class SimpleSolver implements Solver{
 
