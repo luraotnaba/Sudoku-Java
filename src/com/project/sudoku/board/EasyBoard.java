@@ -24,8 +24,8 @@ public class EasyBoard extends SudokuBoard {
     }
 
     private boolean fillBoard() {
-        for(int row = 0; row < 9; ++row) {
-            for(int col = 0; col < 9; ++col) {
+        for(int row = 0; row < SudokuBoard.GRID_SIZE; ++row) {
+            for(int col = 0; col < SudokuBoard.GRID_SIZE; ++col) {
                 if (this.board[row][col] == 0) {
                     int[] numbers = this.getRandomNumbers();
 

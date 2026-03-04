@@ -1,37 +1,25 @@
 package com.project.sudoku.board;
 
 public abstract class SudokuBoard {
-    /*
-     * board
-     * 2D array representing the Sudoku grid.
-     * Values range from 1–9.
-     * 0 means empty cell.
-     */
-    protected int[][] board = new int[9][9];
 
+    final static int GRID_SIZE = 9;
+    protected int[][] board;
 
-    /*
-     * generateBoard()
-     * Abstract method.
-     * Subclasses must implement how the puzzle is created.
-     */
+    public SudokuBoard(){board = new int[GRID_SIZE][GRID_SIZE];}
+
     public abstract void generateBoard();
 
 
-    /*
-     * display()
-     * Prints the board in a formatted layout.
-     */
     public void display() {
 
         System.out.println("    1 2 3   4 5 6   7 8 9");
         System.out.println("  +-------+-------+-------+");
 
-        for (int row = 0; row < 9; row++) {
+        for (int row = 0; row < GRID_SIZE; row++) {
 
-            System.out.print(row + " | ");
+            System.out.print((row + 1) + " | ");
 
-            for (int col = 0; col < 9; col++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
 
                 if (board[row][col] == 0) {
                     System.out.print(". ");
@@ -55,14 +43,10 @@ public abstract class SudokuBoard {
     }
 
 
-    /*
-     * isComplete()
-     * Returns true if no cell contains 0.
-     */
     public boolean isComplete() {
 
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
 
                 if (board[row][col] == 0) {
                     return false; // found empty cell
@@ -74,20 +58,11 @@ public abstract class SudokuBoard {
     }
 
 
-    /*
-     * getBoard()
-     * Returns the board array.
-     */
     public int[][] getBoard() {
         return board;
     }
 
 
-    /*
-     * setNumber(row, col, num)
-     * Sets a value in a cell.
-     * No validation here.
-     */
     public void setNumber(int row, int col, int num) {
         board[row][col] = num;
     }

@@ -2,13 +2,13 @@ package com.project.sudoku.board;
 
 public class MoveValidator {
     public static boolean isValidMove(int[][] board, int row, int col, int num) {
-        for(int c = 0; c < 9; ++c) {
+        for(int c = 0; c < SudokuBoard.GRID_SIZE; ++c) {
             if (board[row][c] == num) {
                 return false;
             }
         }
 
-        for(int r = 0; r < 9; ++r) {
+        for(int r = 0; r < SudokuBoard.GRID_SIZE; ++r) {
             if (board[r][col] == num) {
                 return false;
             }
