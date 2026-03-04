@@ -1,59 +1,62 @@
 package com.project.sudoku.board;
-import java.util.*;
 
-public class EasyBoard extends SudokuBoard{
+import java.util.Random;
 
-    @Override
+public class EasyBoard extends SudokuBoard {
+    Random random = new Random();
+
     public void generateBoard() {
-        fillBoard();
-        removeNumbers(40);
+        this.fillBoard();
+        this.removeNumbers(40);
     }
 
-    private int[] getRandomNumbers(){
-        int numbers[] = {1,2,3,4,5,6,7,8,9};
-        Random rand = new Random();
-        for(int i = numbers.length - 1;i > 0;i--){
-            int j = rand.nextInt(i + 1);
+    private int[] getRandomNumbers() {
+        int[] numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        for(int i = 0; i < numbers.length; ++i) {
+            int j = this.random.nextInt(9);
             int temp = numbers[i];
             numbers[i] = numbers[j];
             numbers[j] = temp;
         }
+
         return numbers;
     }
 
-    private boolean fillBoard(){
-        MoveValidator validator = new MoveValidator();
-        for(int i = 0;i < GRID_SIZE;i++){
-            for(int j = 0;j < GRID_SIZE;j++){
-                if(board[i][j] == 0){
-                    int[] numbers = getRandomNumbers();
-                    for(int num : numbers){
-                        if(validator.isValidMove(board, i, j, num)) {
-                            board[i][j] = num;
+    private boolean fillBoard() {
+        for(int row = 0; row < 9; ++row) {
+            for(int col = 0; col < 9; ++col) {
+                if (this.board[row][col] == 0) {
+                    int[] numbers = this.getRandomNumbers();
 
-                            if(fillBoard()) return true;
-                            board[i][j] = 0;
+                    for(int num : numbers) {
+                        if (MoveValidator.isValidMove(this.board, row, col, num)) {
+                            this.board[row][col] = num;
+                            if (this.fillBoard()) {
+                                return true;
+                            }
+
+                            this.board[row][col] = 0;
                         }
                     }
+
                     return false;
                 }
             }
-
         }
+
         return true;
     }
 
-    private void removeNumbers(int zeroes){
-        Random rand = new Random();
-        int i = 0;
+    private void removeNumbers(int zeroes) {
+        int count = 0;
 
-        while(i < zeroes){
-            int rows = rand.nextInt(GRID_SIZE);
-            int cols = rand.nextInt(GRID_SIZE);
-
-            if(board[rows][cols] != 0) {
-                board[rows][cols] = 0;
-                i++;
+        while(count < zeroes) {
+            int row = this.random.nextInt(9);
+            int col = this.random.nextInt(9);
+            if (this.board[row][col] != 0) {
+                this.board[row][col] = 0;
+                ++count;
             }
         }
 
