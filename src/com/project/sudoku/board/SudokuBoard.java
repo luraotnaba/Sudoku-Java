@@ -2,6 +2,7 @@ package com.project.sudoku.board;
 
 public abstract class SudokuBoard {
 
+    final static int GRID_SIZE = 9;
     protected int[][] board = new int[9][9];
 
 
