@@ -17,7 +17,7 @@ public abstract class SudokuBoard {
 
         for (int row = 0; row < GRID_SIZE; row++) {
 
-            System.out.print(row + " | ");
+            System.out.print((row + 1) + " | ");
 
             for (int col = 0; col < GRID_SIZE; col++) {
 
