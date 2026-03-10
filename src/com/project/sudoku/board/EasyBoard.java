@@ -6,7 +6,6 @@ public class EasyBoard extends SudokuBoard {
 
     private final Random random = new Random();
 
-
     int[][] solvedBoard;
 
     @Override
@@ -16,6 +15,9 @@ public class EasyBoard extends SudokuBoard {
         this.removeNumbers(40);
     }
 
+    public int[][] getSolvedBoard() {
+        return copyBoard(solvedBoard);
+    }
 
     private int[][] copyBoard(int[][] board) {
         int[][] copy = new int[board.length][board[0].length];
