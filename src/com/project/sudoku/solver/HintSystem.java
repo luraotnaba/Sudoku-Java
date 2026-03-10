@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 public class HintSystem {
-    private final SimpleSolver solver;
+    private final Random rand = new Random();
+
     public HintSystem(SimpleSolver solver){
         this.solver = solver;
     }
