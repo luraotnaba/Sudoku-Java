@@ -3,12 +3,31 @@ package com.project.sudoku.board;
 import java.util.Random;
 
 public class EasyBoard extends SudokuBoard {
-    Random random = new Random();
 
+    private final Random random = new Random();
+
+
+    int[][] solvedBoard;
+
+    @Override
     public void generateBoard() {
         this.fillBoard();
+        solvedBoard = copyBoard(board);
         this.removeNumbers(40);
     }
+
+
+    private int[][] copyBoard(int[][] board) {
+        int[][] copy = new int[board.length][board[0].length];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                copy[i][j] = board[i][j];
+            }
+        }
+        return copy;
+    }
+
 
     private int[] getRandomNumbers() {
         int[] numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -19,23 +38,22 @@ public class EasyBoard extends SudokuBoard {
             numbers[i] = numbers[j];
             numbers[j] = temp;
         }
-
         return numbers;
     }
 
     private boolean fillBoard() {
-        for(int row = 0; row < SudokuBoard.GRID_SIZE; ++row) {
-            for(int col = 0; col < SudokuBoard.GRID_SIZE; ++col) {
-                if (this.board[row][col] == 0) {
+        MoveValidator validator = new MoveValidator();
+
+        for(int row = 0; row < SudokuBoard.GRID_SIZE; row++) {
+            for(int col = 0; col < SudokuBoard.GRID_SIZE; col++) {
+                if (board[row][col] == 0) {
                     int[] numbers = this.getRandomNumbers();
 
                     for(int num : numbers) {
-                        if (MoveValidator.isValidMove(this.board, row, col, num)) {
+                        if (validator.isSafe(this.board, row, col, num)) {
                             this.board[row][col] = num;
-                            if (this.fillBoard()) {
-                                return true;
-                            }
 
+                            if (this.fillBoard()) return true;
                             this.board[row][col] = 0;
                         }
                     }
