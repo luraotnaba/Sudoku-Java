@@ -36,7 +36,7 @@ public class GameController {
         System.out.println("\nWelcome to Sudoku Master, " + player.getName() + "!\n");
         board.display();
 
-        while(!board.isComplete()) {
+        while(!isPuzzleSolved()) {
             int choice = inputHandler.getMenuChoice();
 
             switch(choice) {
