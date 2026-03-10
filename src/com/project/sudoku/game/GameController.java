@@ -28,7 +28,8 @@ public class GameController {
 
         validator = new MoveValidator();
         solver = new SimpleSolver();
-        hintSystem = new HintSystem(solver);
+
+        hintSystem = new HintSystem();
     }
 
     public void startGame() {
