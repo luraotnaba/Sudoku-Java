@@ -5,10 +5,11 @@ public abstract class SudokuBoard {
     final static int GRID_SIZE = 9;
     protected int[][] board;
 
-    public SudokuBoard(){board = new int[GRID_SIZE][GRID_SIZE];}
+    public SudokuBoard(){
+        board = new int[GRID_SIZE][GRID_SIZE];
+    }
 
     public abstract void generateBoard();
-
 
     public void display() {
 
@@ -27,7 +28,7 @@ public abstract class SudokuBoard {
                     System.out.print(board[row][col] + " ");
                 }
 
-                // Add vertical separator every 3 columns
+
                 if ((col + 1) % 3 == 0) {
                     System.out.print("| ");
                 }
@@ -35,13 +36,35 @@ public abstract class SudokuBoard {
 
             System.out.println();
 
-            // Add horizontal separator every 3 rows
+
             if ((row + 1) % 3 == 0) {
                 System.out.println("  +-------+-------+-------+");
             }
         }
     }
 
+    public void displaySolved(int[][] solvedBoard) {
+        System.out.println("    1 2 3   4 5 6   7 8 9");
+        System.out.println("  +-------+-------+-------+");
+
+        for (int row = 0; row < GRID_SIZE; row++) {
+            System.out.print((row + 1) + " | ");
+
+            for (int col = 0; col < GRID_SIZE; col++) {
+                System.out.print(solvedBoard[row][col] + " ");
+
+                if ((col + 1) % 3 == 0) {
+                    System.out.print("| ");
+                }
+            }
+
+            System.out.println();
+
+            if ((row + 1) % 3 == 0) {
+                System.out.println("  +-------+-------+-------+");
+            }
+        }
+    }
 
     public boolean isComplete() {
 
@@ -54,7 +77,7 @@ public abstract class SudokuBoard {
             }
         }
 
-        return true; // no empty cells
+        return true;
     }
 
 
