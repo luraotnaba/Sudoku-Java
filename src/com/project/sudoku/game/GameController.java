@@ -83,7 +83,7 @@ public class GameController {
     }
 
     private void handleHint() {
-        Hint hint = hintSystem.getHint(board.getBoard());
+        Hint hint = hintSystem.getHint(board.getBoard(), board.getSolvedBoard());
 
         if(hint != null) {
             System.out.println("Hint: Place " + hint.getNum() + " at (" + (hint.getRow() + 1)
