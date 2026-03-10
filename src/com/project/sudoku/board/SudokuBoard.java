@@ -28,14 +28,12 @@ public abstract class SudokuBoard {
                     System.out.print(board[row][col] + " ");
                 }
 
-
                 if ((col + 1) % 3 == 0) {
                     System.out.print("| ");
                 }
             }
 
             System.out.println();
-
 
             if ((row + 1) % 3 == 0) {
                 System.out.println("  +-------+-------+-------+");
