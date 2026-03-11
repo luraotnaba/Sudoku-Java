@@ -31,8 +31,15 @@ public class InputHandler {
     }
 
     public int getRow() {
-        System.out.print("Enter row (1-9): ");
-        return s.nextInt();
+        while (true) {
+            try {
+                System.out.print("Enter row (1-9): ");
+                return s.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a number between 1 and 9.");
+                s.nextLine();
+            }
+        }
     }
 
     public int getCol() {
