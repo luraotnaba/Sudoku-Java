@@ -55,7 +55,14 @@ public class InputHandler {
     }
 
     public int getNumber() {
-        System.out.print("Enter number (1-9): ");
-        return s.nextInt();
+        while (true) {
+            try {
+                System.out.print("Enter number (1-9): ");
+                return s.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a number between 1 and 9.");
+                s.nextLine();
+            }
+        }
     }
 }
