@@ -28,14 +28,15 @@ public class GameController {
 
         validator = new MoveValidator();
         solver = new SimpleSolver();
-        hintSystem = new HintSystem(solver);
+
+        hintSystem = new HintSystem();
     }
 
     public void startGame() {
         System.out.println("\nWelcome to Sudoku Master, " + player.getName() + "!\n");
         board.display();
 
-        while(!board.isComplete()) {
+        while(!isPuzzleSolved()) {
             int choice = inputHandler.getMenuChoice();
 
             switch(choice) {
@@ -71,7 +72,7 @@ public class GameController {
         int num = inputHandler.getNumber();
 
         //check if move is valid
-        if(validator.isValidMove(board.getBoard(), row, col, num)) {
+        if(validator.isValidMove(board.getBoard(), board.getSolvedBoard(), row, col, num)) {
             board.setNumber(row, col, num);
             System.out.println("Move accepted!\n");
         } else {
@@ -82,7 +83,7 @@ public class GameController {
     }
 
     private void handleHint() {
-        Hint hint = hintSystem.getHint(board.getBoard());
+        Hint hint = hintSystem.getHint(board.getBoard(), board.getSolvedBoard());
 
         if(hint != null) {
             System.out.println("Hint: Place " + hint.getNum() + " at (" + (hint.getRow() + 1)
@@ -96,7 +97,20 @@ public class GameController {
     //show solved board
     private void handleSolveDebug() {
         System.out.println("");
-        solver.solve(board.getBoard());
-        board.display();
+        board.displaySolved(board.getSolvedBoard());
+    }
+
+    private boolean isPuzzleSolved() {
+        int[][] current = board.getBoard();
+        int[][] solved = board.getSolvedBoard();
+
+        for (int row = 0; row < current.length; row++) {
+            for (int col = 0; col < current[row].length; col++) {
+                if (current[row][col] != solved[row][col]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
